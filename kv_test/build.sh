@@ -19,7 +19,6 @@ echo "Start Building PGM"
 for ((i = 0; i < ${#DATASET_NAMES[@]}; i++)) do
     dataset_name="${DATASET_NAMES[$i]}"
     echo ">>> ${dataset_name} ${j}"
-    bash ./reload_local.sh
     ./kv_test/kv_build \
 	--data_path=${ROOT}/data/${dataset_name} \
    	--build_db_path=${ROOT}/temp/pgm/${dataset_name} \
