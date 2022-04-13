@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
     auto start_t = std::chrono::high_resolution_clock::now();
 
     // load mapped pgm
-    pgm::MappedPGMIndex<uint64_t, 32, 32> pgm(target_db_path);
+    pgm::MappedPGMIndex<uint64_t, 128, 128> pgm(target_db_path);
 
     // issue queries and check answers
     size_t err;

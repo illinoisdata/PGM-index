@@ -132,11 +132,13 @@ int main(int argc, char* argv[]) {
     std::vector<uint64_t> data = read_data_binary<uint64_t>(data_path, true);
 
     // Construct the disk-backed container
-    pgm::MappedPGMIndex<uint64_t, 32, 32> pgm(data.begin(), data.end(), build_db_path);
+    pgm::MappedPGMIndex<uint64_t, 128, 128> pgm(data.begin(), data.end(), build_db_path);
     std::cout << "Created indexed file at " << build_db_path << std::endl
               << "- elements " << pgm.size() << std::endl
               << "- file size " << pgm.file_size_in_bytes() << " bytes" << std::endl
-              << "- index size " << pgm.size_in_bytes() << " bytes" << std::endl << std::endl;
+              << "- index size " << pgm.size_in_bytes() << " bytes" << std::endl
+              << "- segments_count " << pgm.segments_count() << std::endl
+              << "- height " << pgm.height() << std::endl << std::endl;
 
     // Copy to target directory (slow random write)
     if (build_path != target_path) {
