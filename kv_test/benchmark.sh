@@ -8,18 +8,24 @@ DATASET_NAMES=(
 )
 
 ROOT=$1
+OUT_PATH=${ROOT}/out-newks
+
 echo "${ROOT}"
+
+mkdir -p ${ROOT}/temp/pgm
+mkdir -p ${ROOT}/storage/pgm
+mkdir -p ${OUT_PATH}
 
 echo "Start PGM Benchmark"
 
 for ((i = 0; i < ${#DATASET_NAMES[@]}; i++)) do
-    for ((j = 0; j < 10; j++)) do
+    for ((j = 0; j < 40; j++)) do
         dataset_name="${DATASET_NAMES[$i]}"
        	echo ">>> ${dataset_name} ${j}"
-	bash ./reload_local.sh
+	bash ./reload_nfs.sh
 	./kv_test/kv_benchmark \
-   	    --key_path=${ROOT}/keyset/${dataset_name}_ks \
+   	    --key_path=${ROOT}/newkeyset/${dataset_name}_ks_${j} \
             --target_db_path=${ROOT}/storage/pgm/${dataset_name} \
-	    --out_path=${ROOT}/out/${dataset_name}_out.txt
+	    --out_path=${OUT_PATH}/${dataset_name}_out.txt
     done
 done

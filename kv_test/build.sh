@@ -12,7 +12,6 @@ echo "${ROOT}"
 
 mkdir -p ${ROOT}/temp/pgm
 mkdir -p ${ROOT}/storage/pgm
-mkdir -p ${ROOT}/out
 
 echo "Start Building PGM"
 
