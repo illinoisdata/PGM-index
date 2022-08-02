@@ -5,6 +5,7 @@ DATASET_NAMES=(
   "fb_200M_uint64"
   "osm_cellids_800M_uint64"
   "wiki_ts_200M_uint64"
+  "gmm_k100_800M_uint64"
 )
 
 ROOT=$1
