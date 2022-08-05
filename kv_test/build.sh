@@ -9,6 +9,7 @@ DATASET_NAMES=(
 )
 
 ROOT=$1
+DATA_PATH=$2
 echo "${ROOT}"
 
 mkdir -p ${ROOT}/temp/pgm
@@ -20,7 +21,7 @@ for ((i = 0; i < ${#DATASET_NAMES[@]}; i++)) do
     dataset_name="${DATASET_NAMES[$i]}"
     echo ">>> ${dataset_name} ${j}"
     ./kv_test/kv_build \
-	--data_path=${ROOT}/data/${dataset_name} \
+	--data_path=${DATA_PATH}/${dataset_name} \
    	--build_db_path=${ROOT}/temp/pgm/${dataset_name} \
 	--target_db_path=${ROOT}/storage/pgm/${dataset_name}
     
