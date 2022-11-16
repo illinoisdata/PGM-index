@@ -12,7 +12,7 @@ Please follow [instructions here](https://github.com/illinoisdata/PGM-index/blob
 bash build.sh /path/to/output /path/to/data
 ```
 
-## Benchmark (5.2)
+## Benchmark (6.2 & 6.4)
 
 Benchmark over 40 key set of 1M keys
 
@@ -22,7 +22,7 @@ bash benchmark.sh /path/to/output /path/to/keyset ~/reload_local.sh
 
 The measurements will be recorded in `/path/to/output/out` folder.
 
-## Build Scalability (5.6)
+## Build Scalability (6.7)
 
 To measure the build time, run the build script.
 
