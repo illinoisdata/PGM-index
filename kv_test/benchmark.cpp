@@ -50,7 +50,11 @@ int main(int argc, char* argv[]) {
     std::string key_path = get_required(flags, "key_path");  // query keys and answers
     std::string target_db_path = get_required(flags, "target_db_path");  // path to save db file
     std::string out_path = get_required(flags, "out_path");  // output log
+    std::string num_samples_str = get_with_default(flags, "num_samples", "0");  // number of queries
     fs::path target_path(target_db_path);
+    size_t num_samples = 0;
+    std::stringstream(num_samples_str) >> num_samples;
+    std::cout << "num_samples= " << num_samples << std::endl;
 
     // load keyset
     std::vector<uint64_t> queries;
@@ -71,6 +75,9 @@ int main(int argc, char* argv[]) {
             expected_ans.push_back(std::stoull(exp));
         }   
     }
+    if (num_samples == 0) {
+      num_samples = queries.size();
+    }
 
     // variables for milestone
     size_t last_count_milestone = 0;
@@ -86,7 +93,7 @@ int main(int argc, char* argv[]) {
 
     // issue queries and check answers
     size_t err;
-    for (size_t t_idx = 0; t_idx < queries.size(); t_idx++) {
+    for (size_t t_idx = 0; t_idx < num_samples; t_idx++) {
         // query and answer
         uint64_t key = queries[t_idx];
         uint64_t answer = expected_ans[t_idx];  
@@ -100,7 +107,7 @@ int main(int argc, char* argv[]) {
             printf("ERROR: incorrect rank: %d, expected: %d\n", pgm_rank, answer);
         }
 
-        if (t_idx + 1 == count_milestone || t_idx + 1 == queries.size()) {
+        if (t_idx + 1 == count_milestone || t_idx + 1 == num_samples) {
             timestamps.push_back(report_t(t_idx, count_milestone, last_count_milestone, last_elapsed, start_t));    
         }
     }
